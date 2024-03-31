@@ -1,0 +1,44 @@
+<div class="card">
+  <!-- Cabeçalho -->
+  <div class="card-header">
+    <div class="d-flex justify-content-between">
+      <div><strong>Minhas Tarefas</strong></div>
+      <div>
+        <button class="btn btn-primary" [routerLink]="['/tarefas/cadastrar']">
+          <i class="fa fa-plus"></i> Nova tarefa
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- tabela -->
+  <div class="table-responsive">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tarefa of tarefas">
+          <td>
+            {{tarefa.nome}}
+          </td>
+          <td>
+            {{(tarefa.concluido ? 'Concluído' : 'Pendente')}}
+          </td>
+          <td>
+            <button class="btn btn-outline-primary btn-sm mr-2" [routerLink]="['/tarefas', tarefa.id, 'editar']">
+              <i class="fa fa-edit"></i>
+            </button>
+            <button class="btn btn-outline-danger btn-sm" (click)="excluirTarefa(tarefa.id,tarefa.name);">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

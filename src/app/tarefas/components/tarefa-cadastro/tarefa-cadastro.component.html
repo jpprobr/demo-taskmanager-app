@@ -1,0 +1,64 @@
+<div class="card">
+
+  <!-- Cabeçalho -->
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body">
+    <!-- Formulário -->
+    <form novalidate (ngSubmit)=salvar() [formGroup]="tarefaForm">
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="nome">Nome</label>
+        <div class="col-md-7">
+          <input class="form-control" type="text" id="nome" name="nome" placeholder="Informe o nome da tarefa"
+            formControlName="nome">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="detalhes">Detalhes</label>
+        <div class="col-md-7">
+          <textarea class="form-control" name="detalhes" id="detalhes" rows="3"
+            placeholder="Informe os detalhes da tarefa" formControlName="detalhes">
+          </textarea>
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="showStatus">
+        <label class="col-md-2 col-form-label" for="detalhes">Conclusão</label>
+        <div class="col-md-7">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="concluido" formControlName="concluido">
+            <label class="custom-control-label" for="concluido">Marque se esta tarefa já foi finalizada</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ações -->
+      <div class="form-group row mb-2">
+        <div class="offset-md-2 col-md-6">
+          <button class="btn btn-primary mr-2" type="submit"
+            [title]="tarefaForm.valid ? 'Salvar' : 'Desabilitado até que os dados estejam válidos'"
+            [disabled]="!tarefaForm.valid">
+            Salvar
+          </button>
+          <button class="btn btn-outline-secondary mr-2" type="button" title="Cancelar" [routerLink]="['/tarefas']">
+            Cancelar
+          </button>
+          <button class="btn btn-outline-danger" *ngIf="pageTitle != 'Adicionar Tarefa'" type="button"
+            title="Excluir esta tarefa" (click)="excluirTarefa()">
+            Excluir
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+<!-- Alertas/Erros -->
+<div class="alert alert-danger" *ngIf="errorMessage">
+  {{errorMessage}}
+</div>
